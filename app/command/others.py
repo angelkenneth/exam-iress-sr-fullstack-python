@@ -1,3 +1,4 @@
+import sys
 from typing import TYPE_CHECKING
 
 from app.command.base import BaseCommand
@@ -17,3 +18,8 @@ class NoneCommand(BaseCommand):
     def invoke(self, robot: "Robot"):
         """ Do nothing """
         return robot
+
+
+class ExitCommand(BaseCommand):
+    def invoke(self, robot: "Robot"):
+        sys.exit(0)

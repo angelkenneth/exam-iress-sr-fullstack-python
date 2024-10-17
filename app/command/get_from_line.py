@@ -1,6 +1,6 @@
 from app.command.exception import UnknownCommandException
 from app.command.move import MoveCommand
-from app.command.others import ReportCommand, NoneCommand
+from app.command.others import ReportCommand, NoneCommand, ExitCommand
 from app.command.place import PlaceCommand
 from app.command.rotate import RightCommand, LeftCommand
 from app.utility.parse_command import parse_command_line
@@ -21,4 +21,6 @@ def get_command_from_line(command_str: str):
         return ReportCommand.validate_or_raise()
     if command == "NONE":
         return NoneCommand.validate_or_raise()
+    if command == "EXIT":
+        return ExitCommand.validate_or_raise()
     raise UnknownCommandException(command)

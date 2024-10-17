@@ -1,4 +1,7 @@
+import sys
+
 from app.command.get_from_line import get_command_from_line
+from app.command.others import ExitCommand
 from app.command.place import PlaceCommand
 from app.run.from_list import try_to_run
 from app.exception.exception import MessagedException
@@ -13,7 +16,7 @@ def try_to_run_1st_command_from_input(robot: Robot):
     except MessagedException as exception:
         logger.error(exception.message)
         return try_to_run_1st_command_from_input(robot)
-    if isinstance(command, PlaceCommand):
+    if isinstance(command, (PlaceCommand, ExitCommand)):
         return command.invoke(robot)
     else:
         logger.warning("First command must be PLACE")
@@ -34,6 +37,6 @@ def intake_commands_from_input():
             robot = try_to_run_command_from_input(robot)
             if not robot:
                 return
-    except (KeyboardInterrupt, EOFError):
+    except (KeyboardInterrupt, EOFError, SystemExit):
         logger.info("Thank you for coming!")
-        exit(0)
+        sys.exit(0)
