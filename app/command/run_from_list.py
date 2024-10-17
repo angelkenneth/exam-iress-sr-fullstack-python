@@ -3,7 +3,7 @@ from typing import List
 from app.command.get_from_line import get_command_from_line
 from app.logger import logger
 from app.robot.robot import Robot
-from app.shared.exception import MessagedException
+from app.exception.exception import MessagedException
 
 
 def try_to_run(robot: Robot, command_line: str):

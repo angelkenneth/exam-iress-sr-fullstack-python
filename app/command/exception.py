@@ -1,4 +1,4 @@
-from app.shared.exception import MessagedException
+from app.exception.exception import MessagedException
 
 
 class InvalidCommandArgumentException(MessagedException):
