@@ -15,3 +15,7 @@ class RightCommand(BaseCommand):
 
 class ReportCommand(BaseCommand):
     pass
+
+
+class NoneCommand(BaseCommand):
+    pass

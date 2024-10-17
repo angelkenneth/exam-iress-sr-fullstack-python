@@ -1,6 +1,6 @@
 from app.command.exception import UnknownCommandException
 from app.command.others import MoveCommand, LeftCommand, RightCommand, \
-    ReportCommand
+    ReportCommand, NoneCommand
 from app.command.place import PlaceCommand
 from app.utility.parse_command import parse_command_line
 
@@ -18,4 +18,6 @@ def get_command_from_line(command_str: str):
         return RightCommand.validate_or_raise()
     if command == "REPORT":
         return ReportCommand.validate_or_raise()
+    if command == "NONE":
+        return NoneCommand.validate_or_raise()
     raise UnknownCommandException(command)
