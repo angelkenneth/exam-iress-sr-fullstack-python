@@ -31,27 +31,27 @@ class PlaceCommand(BaseCommand):
         error_list = []
 
         if x_offset is None:
-            error_list.append(f"X position missing")
+            error_list.append("X position missing")
         else:
             try:
                 x_offset = int(x_offset)
             except ValueError:
                 error_list.append(f"X({x_offset}) must be int")
         if y_offset is None:
-            error_list.append(f"Y position missing")
+            error_list.append("Y position missing")
         else:
             try:
                 y_offset = int(y_offset)
             except ValueError:
                 error_list.append(f"Y({y_offset}) must be int")
         if direction is None:
-            error_list.append(f"Direction missing")
+            error_list.append("Direction missing")
         elif not isinstance(direction, Direction):
             try:
                 direction = Direction[direction.upper()]
             except KeyError:
                 error_list.append(
-                    f"Direction must be one of: NORTH,SOUTH,EAST,WEST")
+                    "Direction must be one of: NORTH,SOUTH,EAST,WEST")
 
         if error_list:
             raise InvalidCommandArgumentException("; ".join(error_list))

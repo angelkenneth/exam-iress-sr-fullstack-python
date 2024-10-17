@@ -34,4 +34,3 @@ class RightCommand(BaseCommand):
         elif new_robot.direction == Direction.WEST:
             new_robot.direction = Direction.NORTH
         return new_robot
-
