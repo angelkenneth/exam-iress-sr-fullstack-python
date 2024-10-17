@@ -1,21 +1,19 @@
+from typing import TYPE_CHECKING
+
 from app.command.base import BaseCommand
+from app.logger import logger
 
-
-class MoveCommand(BaseCommand):
-    pass
-
-
-class LeftCommand(BaseCommand):
-    pass
-
-
-class RightCommand(BaseCommand):
-    pass
+if TYPE_CHECKING:
+    from app.robot.robot import Robot
 
 
 class ReportCommand(BaseCommand):
-    pass
+    def invoke(self, robot: "Robot"):
+        logger.info(robot.report)
+        return robot
 
 
 class NoneCommand(BaseCommand):
-    pass
+    def invoke(self, robot: "Robot"):
+        """ Do nothing """
+        return robot

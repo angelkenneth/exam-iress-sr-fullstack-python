@@ -1,8 +1,9 @@
+from pytest import raises
+
 from app.command.exception import UnknownCommandException
 from app.command.get_from_line import get_command_from_line
-from app.command.others import LeftCommand
 from app.command.place import PlaceCommand
-from pytest import raises
+from app.command.rotate import LeftCommand
 
 
 def test_place_command():

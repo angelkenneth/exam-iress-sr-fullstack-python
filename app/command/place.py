@@ -1,6 +1,13 @@
+from copy import copy
+from typing import TYPE_CHECKING, Union
+
 from app.command.base import BaseCommand
 from app.command.enum import Direction
-from app.command.exception import InvalidCommandArgument
+from app.command.exception import InvalidCommandArgumentException
+from app.logger import logger
+
+if TYPE_CHECKING:
+    from app.robot.robot import Robot
 
 
 class PlaceCommand(BaseCommand):
@@ -17,9 +24,9 @@ class PlaceCommand(BaseCommand):
     @classmethod
     def validate_or_raise(
             cls,
-            x_offset: str | int,
-            y_offset: str | int,
-            direction: str | Direction
+            x_offset: Union[str, int] = None,
+            y_offset: Union[str, int] = None,
+            direction: Union[str, Direction] = None
     ):
         error_list = []
 
@@ -31,7 +38,9 @@ class PlaceCommand(BaseCommand):
             y_offset = int(y_offset)
         except ValueError:
             error_list.append(f"Y({y_offset}) must be int")
-        if not isinstance(direction, Direction):
+        if direction is None:
+            error_list.append(f"Argument 3 missing")
+        elif not isinstance(direction, Direction):
             try:
                 direction = Direction[direction.upper()]
             except KeyError:
@@ -39,6 +48,16 @@ class PlaceCommand(BaseCommand):
                     f"Direction must be one of: NORTH,SOUTH,EAST,WEST")
 
         if error_list:
-            raise InvalidCommandArgument("; ".join(error_list))
+            raise InvalidCommandArgumentException("; ".join(error_list))
 
         return PlaceCommand(x_offset, y_offset, direction)
+
+    def invoke(self, robot: "Robot"):
+        new_robot = copy(robot)
+        new_robot.x_current = self.x_offset
+        new_robot.y_current = self.y_offset
+        new_robot.direction = self.direction
+        if new_robot.is_inbounds:
+            return new_robot
+        logger.error(f"Coordinates({self.x_offset},{self.y_offset}) are out of bounds, aborting")
+        return robot

@@ -1,3 +1,3 @@
 from logging import getLogger
 
-logger = getLogger('robot')
+logger = getLogger()
