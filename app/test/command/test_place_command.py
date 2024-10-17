@@ -45,10 +45,22 @@ def test_multiple_invalid_argument():
     assert exception.value.message == "X(1.25) must be int; Direction must be one of: NORTH,SOUTH,EAST,WEST"
 
 
-def test_no_arguments():
+def test_no_3rd_argument():
     with raises(InvalidCommandArgumentException) as exception:
         PlaceCommand.validate_or_raise("1", "2")
-    assert exception.value.message == "Argument 3 missing"
+    assert exception.value.message == "Direction missing"
+
+
+def test_no_2nd_3rd_arguments():
+    with raises(InvalidCommandArgumentException) as exception:
+        PlaceCommand.validate_or_raise("1")
+    assert exception.value.message == "Y position missing; Direction missing"
+
+
+def test_no_arguments():
+    with raises(InvalidCommandArgumentException) as exception:
+        PlaceCommand.validate_or_raise()
+    assert exception.value.message == "X position missing; Y position missing; Direction missing"
 
 
 def test_robot_is_placed_in_the_middle():

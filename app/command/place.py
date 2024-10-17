@@ -30,16 +30,22 @@ class PlaceCommand(BaseCommand):
     ):
         error_list = []
 
-        try:
-            x_offset = int(x_offset)
-        except ValueError:
-            error_list.append(f"X({x_offset}) must be int")
-        try:
-            y_offset = int(y_offset)
-        except ValueError:
-            error_list.append(f"Y({y_offset}) must be int")
+        if x_offset is None:
+            error_list.append(f"X position missing")
+        else:
+            try:
+                x_offset = int(x_offset)
+            except ValueError:
+                error_list.append(f"X({x_offset}) must be int")
+        if y_offset is None:
+            error_list.append(f"Y position missing")
+        else:
+            try:
+                y_offset = int(y_offset)
+            except ValueError:
+                error_list.append(f"Y({y_offset}) must be int")
         if direction is None:
-            error_list.append(f"Argument 3 missing")
+            error_list.append(f"Direction missing")
         elif not isinstance(direction, Direction):
             try:
                 direction = Direction[direction.upper()]
@@ -59,5 +65,6 @@ class PlaceCommand(BaseCommand):
         new_robot.direction = self.direction
         if new_robot.is_inbounds:
             return new_robot
-        logger.error(f"Coordinates({self.x_offset},{self.y_offset}) are out of bounds, aborting")
+        logger.error(
+            f"Coordinates({self.x_offset},{self.y_offset}) are out of bounds, aborting")
         return robot
