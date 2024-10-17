@@ -1,6 +1,6 @@
 from app.command.get_from_line import get_command_from_line
 from app.command.place import PlaceCommand
-from app.command.run_from_list import try_to_run
+from app.run.from_list import try_to_run
 from app.exception.exception import MessagedException
 from app.logger import logger
 from app.robot.robot import Robot

@@ -1,6 +1,6 @@
 import logging
 
-from app.command.run_from_list import run_command_list
+from app.run.from_list import run_command_list
 from app.robot.robot import Robot
 
 

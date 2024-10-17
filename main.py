@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import logging
 
-from app.command.run_from_stdin import intake_commands_from_input
+from app.run.from_stdin import intake_commands_from_input
 
 logging.basicConfig(level=logging.INFO)
 
