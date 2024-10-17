@@ -13,7 +13,7 @@ Python 3.8.19
 
 This application has no dependencies, hence, no additional `pip3 install` needed
 
-The lowest Python version that I got this to work with was `3.8`, which comes pre-installed on most modern machined, hopefully not needing `venv`
+The lowest Python version that I got this to work was with `3.8`, which comes pre-installed on most modern machines, hence, I hope you will not need `venv`
 
 ### Unittest Setup
 
@@ -23,7 +23,7 @@ pip3 install "pytest>=4.6.0"
 
 `pytest` is the only dev dependency
 
-The lowest version of `pytest` that I got this to run was `4.6.0`, if you already have it installed on you global, its likely you can run the unit tests already
+The lowest version of `pytest` that I got this to run was `4.6.0`, if you already have it installed on you global, it is likely you can run the unit tests already
 
 #### Pipenv Method
 
