@@ -1,5 +1,3 @@
-from typing import List
-
 from app.command.exception import UnknownCommandException
 from app.command.move import MoveCommand
 from app.command.others import ReportCommand, NoneCommand
@@ -24,7 +22,3 @@ def get_command_from_line(command_str: str):
     if command == "NONE":
         return NoneCommand.validate_or_raise()
     raise UnknownCommandException(command)
-
-
-def get_commands_from_lines(command_list: List[str]):
-    return list(map(get_command_from_line, command_list))
